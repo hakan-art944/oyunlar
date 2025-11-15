@@ -1,0 +1,37 @@
+<script>
+    let randomNumber = Math.floor(Math.random() * 1000) + 1;
+    let attempts = 0;
+    document.getElementById("attempts").innerText = "Deneme: 0";
+
+    function checkGuess() {
+        const guessInput = document.getElementById("guess");
+        let guess = parseInt(guessInput.value);
+        if (isNaN(guess) || guess < 1 || guess > 1000) {
+            document.getElementById("result").innerText = "Geçerli bir sayı girin (1-1000)!";
+            return;
+        }
+        attempts++;
+        document.getElementById("attempts").innerText = "Deneme: " + attempts;
+
+        if (guess < randomNumber) {
+            document.getElementById("result").innerText = "Daha büyük bir sayı girin.";
+        } else if (guess > randomNumber) {
+            document.getElementById("result").innerText = "Daha küçük bir sayı girin.";
+        } else {
+            document.getElementById("result").innerText = `Tebrikler! ${attempts} denemede buldunuz! Sayı: ${randomNumber}`;
+            document.getElementById("restartBtn").style.display = "inline-block";
+        }
+        guessInput.value = '';
+        guessInput.focus();
+    }
+
+    function restartGame() {
+        randomNumber = Math.floor(Math.random() * 1000) + 1;
+        attempts = 0;
+        document.getElementById("result").innerText = "";
+        document.getElementById("attempts").innerText = "Deneme: 0";
+        document.getElementById("restartBtn").style.display = "none";
+        document.getElementById("guess").value = '';
+        document.getElementById("guess").focus();
+    }
+</script>
